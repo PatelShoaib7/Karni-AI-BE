@@ -26,10 +26,10 @@ app.get("/login", loginRateLimiter, Encode_JWT_TokenMiddleware);
 
 
 app.use(Decode_JWT_TokenMiddleware)
-app.use("/user",UserRouter)
+app.use("/user", UserRouter)
 
 
-app.use("/",  async (req, res) => {
+app.use("/", async (req, res) => {
     if (req.url === "/") {
         return res.status(200).json({ errCode: -1, error: false, message: "Hello World" });
     }

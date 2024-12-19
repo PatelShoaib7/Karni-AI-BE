@@ -1,7 +1,7 @@
 //const auditLogger = require("../Middle//wares/auditLogger");
 const { CartItems } = require("../Models/CartModel");
 const { itemSchema } = require("../Models/itemsModel");
- 
+
 
 
 
@@ -95,37 +95,37 @@ const addToCart = async (req, res) => {
         if (!userId) {
             return res.status(400).json({
                 success: false,
-                errCode : 1,
+                errCode: 1,
                 message: "User ID and is required."
             });
         }
         if (!itemId) {
             return res.status(400).json({
                 success: false,
-                errCode : 1,
+                errCode: 1,
                 message: "Item ID is required."
             });
         }
 
         const existingCartItems = await CartItems.findOne({ userId, itemId });
-        console.log("--existingCartItems--",existingCartItems)
+        console.log("--existingCartItems--", existingCartItems)
         if (existingCartItems) {
-            existingCartItems.quantity =  existingCartItems.quantity + quantity;
+            existingCartItems.quantity = existingCartItems.quantity + quantity;
             await existingCartItems.save();
         } else {
             // Create a new cart item
-           const itemAddedToCartResult =  await CartItems.create({userId, itemId, quantity })
-           console.log("--itemAddedToCartResult--",itemAddedToCartResult)
+            const itemAddedToCartResult = await CartItems.create({ userId, itemId, quantity })
+            console.log("--itemAddedToCartResult--", itemAddedToCartResult)
         }
-      //Save Logs in DB before sending resposne
+        //Save Logs in DB before sending resposne
         return res.status(201).json({
             success: true,
-            errCode : 1,
+            errCode: 1,
             message: "Item added to cart successfully."
         });
     } catch (error) {
         console.log("Error adding item to cart:", error.message);
-          //Save Logs in DB before sending resposne
+        //Save Logs in DB before sending resposne
         return res.status(500).json({
             success: false,
             message: "Failed to add item to cart.",
@@ -159,7 +159,7 @@ const removeFromCart = async (req, res) => {
                 message: "Item not found in cart."
             });
         }
-          //Svae log before sending response
+        //Svae log before sending response
         return res.status(200).json({
             success: true,
             errCode: 1,
@@ -170,7 +170,7 @@ const removeFromCart = async (req, res) => {
         //Svae log before sending response
         return res.status(500).json({
             success: false,
-            errCode : -1,
+            errCode: -1,
             message: "Failed to remove item from cart.",
             error: error.message
         });
@@ -181,6 +181,6 @@ const removeFromCart = async (req, res) => {
 
 module.exports = {
     getUsersItemList: getUsersItemList,
-    addToCart  : addToCart,
-    removeFromCart : removeFromCart
+    addToCart: addToCart,
+    removeFromCart: removeFromCart
 }
