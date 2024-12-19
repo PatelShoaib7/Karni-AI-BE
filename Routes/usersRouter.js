@@ -1,8 +1,13 @@
 const { Router } = require("express");
-const { getUsersItemList } = require("../API/user");
+const user = require("../API/user");
 const UserRouter = Router()
 
-UserRouter.get("/get/item-list" , getUsersItemList)
+UserRouter.get("/get/item/list" , user.getUsersItemList)
+
+UserRouter.post("/add/item/cart" , user.addToCart)
+
+UserRouter.post("/delete/item/cart" , user.removeFromCart)
+
 
 module.exports= {
     UserRouter : UserRouter
