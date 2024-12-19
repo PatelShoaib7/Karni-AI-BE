@@ -5,9 +5,12 @@ const rateLimit = require("express-rate-limit");
 const { Encode_JWT_TokenMiddleware, Decode_JWT_TokenMiddleware } = require("./Middlewares/auth-decode");
 const { UserRouter } = require("./Routes/usersRouter");
 const REQ_LIMIT = process.env.REQ_LIMIT
+const cors = require('cors');
+
 
 const app = express();
 const PORT = process.env.PORT || 8000;
+app.use(cors());
 app.use(express.json());
 
 
