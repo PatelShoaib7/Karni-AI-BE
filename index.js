@@ -33,7 +33,7 @@ app.use("/",  async (req, res) => {
     if (req.url === "/") {
         return res.status(200).json({ errCode: -1, error: false, message: "Hello World" });
     }
-    res.status(404).json({ error: true, message: "Route not found" });
+    res.status(404).json({ error: true, message: "Requst not found" });
 });
 
 // Start the server

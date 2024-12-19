@@ -1,5 +1,6 @@
 //const auditLogger = require("../Middle//wares/auditLogger");
 const { itemSchema } = require("../Models/itemsModel");
+const { CartItem } = require('./models/cartItem'); 
 
 
 
@@ -58,7 +59,6 @@ const getUsersItemList = async (req, res, next) => {
 };
 
 
-const { CartItem } = require('./models/cartItem'); // Ensure the correct path
 
 const addToCart = async (req, res) => {
     try {
@@ -92,7 +92,7 @@ const addToCart = async (req, res) => {
             message: "Item added to cart successfully."
         });
     } catch (error) {
-        console.error("Error adding item to cart:", error.message);
+        console.log("Error adding item to cart:", error.message);
         return res.status(500).json({
             success: false,
             message: "Failed to add item to cart.",
